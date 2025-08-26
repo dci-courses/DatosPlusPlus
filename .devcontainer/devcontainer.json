@@ -1,13 +1,10 @@
 {
 	"name": "DatosPlusPlus DevContainer",
 	"image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
-	// Exponer puerto JupyterLab para abrirlo en navegador
 	"forwardPorts": [
 		8888
 	],
-	// Instalar dependencias, nbdev, jupyterlab y registrar kernel
-	"postCreateCommand": "pip install --no-cache-dir -r requirements.txt && pip install -e . && pip install nbdev jupyterlab ipykernel && python -m ipykernel install --name datosplusplus --display-name 'Python (DatosPlusPlus)' --user",
-	// Extensiones y configuración recomendada
+	"postCreateCommand": "pip install --no-cache-dir -r requirements.txt && pip install -e . && pip install nbdev jupyterlab ipykernel && python -m ipykernel install --name datosplusplus --display-name 'Python (DatosPlusPlus)'",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -16,11 +13,10 @@
 				"ms-azuretools.vscode-docker"
 			],
 			"settings": {
-				// Nombre del kernel a seleccionar automáticamente
 				"jupyter.notebook.defaultKernel": "Python (DatosPlusPlus)",
 				"jupyter.kernels.filter": [
 					{
-						"path": "/root/.local/share/jupyter/kernels/datosplusplus"
+						"name": "datosplusplus"
 					}
 				]
 			}
