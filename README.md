@@ -38,7 +38,7 @@ Dentro de VS Code:
 
 1. Presiona `Ctrl + Shift + P` (o `Cmd + Shift + P` en Mac)
 2. Escribe y selecciona: `Dev Containers: Rebuild and Reopen in Container`
-![Abrir como Dev Container](https://github.com/user-attachments/assets/096cafe9-5e98-4bc9-9fe3-a9877ec81d82)
+![Abrir como Dev Container](https://github.com/dci-courses/DatosPlusPlus/blob/main/Abrir%20como%20Dev%20Container.png?raw=true)
 
 Esto reiniciará VS Code dentro de un contenedor Docker con el entorno preconfigurado.
 
@@ -46,7 +46,7 @@ Esto reiniciará VS Code dentro de un contenedor Docker con el entorno preconfig
 
 1. Abre cualquier notebook `.ipynb`
 2. Al ejecutar una celda por primera vez, selecciona el kernel: **Python (DatosPlusPlus)**
-![Seleccionar Kernel](https://github.com/user-attachments/assets/f737361f-2d94-476c-8e31-a6156f9da2b4)
+![Seleccionar Kernel](https://github.com/dci-courses/DatosPlusPlus/blob/main/Seleccionar%20Kernel.png?raw=true)
 
 ## 💡 Soporte
 
