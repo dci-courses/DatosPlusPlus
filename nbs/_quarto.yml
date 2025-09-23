@@ -32,5 +32,5 @@ website:
 metadata-files: [nbdev.yml, sidebar.yml]
 
 execute:
-  enabled: true
+  eval: false
   cache: false
