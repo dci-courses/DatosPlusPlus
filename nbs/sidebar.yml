@@ -1,82 +1,9 @@
 website:
   sidebar:
     contents:
-      - index.qmd
-      - section: C00 - Intro a Modelos Pre-Entrenados
+      - index.ipynb
+      - section: Reglas de Asociación
         contents:
-          - section: Teachable Machines
-            contents:
-              - techeable-machines/00_intro.qmd
-              - techeable-machines/01_actividad_1.qmd
-          - section: Procesamiento de Imágenes
-            contents:
-              - imagenes_como_dato/01_imgDato.qmd
-              - imagenes_como_dato/02_imgDato.qmd
-          - section: Biblioteca P5
-            contents:
-              - p5/01_p5.qmd
-              - p5/02_p5_ini_project.qmd
-          - section: Modelos TM + P5
-            contents:
-              - tm_p5/01_clasificador.qmd
-              - tm_p5/02_codigo_clasificador.qmd
-              - tm_p5/03_snake.qmd 
-              - tm_p5/04_codigo_snake.qmd 
-              - tm_p5/05_codigo_snake_con_gestos.qmd 
-
-          - section: p5 + ml5
-            contents:
-              - p5_ml5/01_sound_classifier.qmd
-              - p5_ml5/02_codigo_clasificador_sonido.qmd
-              - p5_ml5/03_codigo_image_classifier.qmd
-      
-      - section: C01 - Intro EDA
-        contents:
-          - section: Intro
-            contents:
-              - eda/00_intro.qmd
-              - eda/01_simple_api.qmd
-              - eda/02_eda_basico.qmd
-              
-
-      - section: C10 - Usando Github en Windows
-        contents:
-          - intro_github/00_consideraciones.qmd
-          - section: Métodos
-            contents:
-              - intro_github/01_personal_token.qmd
-              - intro_github/02_ssh_key.qmd
-              - intro_github/03_github_desktop.qmd
-      - section: C11 - Usando nbdev
-        contents:
-          - nbdev_tutorial/antes_de_usar.qmd
-          - nbdev_tutorial/primeros_pasos.qmd
-          - nbdev_tutorial/primera_edicion.qmd
-      - section: C12 - Exploración de Datos
-        contents:
-          - section: API Getonbrd
-            contents:
-              - exploracion_de_datos/getonbrd/getonbrd.qmd
-          - section: API Spotify
-            contents:
-              - exploracion_de_datos/spotify/spotify.qmd
-      - section: C13 - NLP
-        contents:
-          - section: Clasificación de texto
-            contents:
-              - "nlp/00_predicciones.ipynb"
-          - section: Procesamiento de texto
-            contents:
-              - "nlp/01_clasificacion_de_texto.ipynb"
-
-      - section: C14 - Association Rules
-        contents:
-          - section: Ejemplo 1
-            contents:
-              - "association-rules/00_ejemplo_1.1.ipynb"
-          - section: Ejemplo 2
-            contents:
-              - "association-rules/02_ejemplo_1.2.ipynb"
-          - section: Ejercicio
-            contents:
-              - "association-rules/03_ejercicio.ipynb"
+          - association-rules/00_ejemplo_1.1.ipynb
+          - association-rules/02_ejemplo_1.2.ipynb
+          - association-rules/03_ejercicio.ipynb
