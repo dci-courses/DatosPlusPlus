@@ -7,3 +7,8 @@ website:
           - association-rules/00_ejemplo_1.1.ipynb
           - association-rules/02_ejemplo_1.2.ipynb
           - association-rules/03_ejercicio.ipynb
+      - section: Classification
+        contents:
+          - classification/classification_keylogger.ipynb
+          - classification/classification_ransomware.ipynb
+          - classification/classification_software_defects.ipynb
