@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: _docs
 lang: es
 format:
   html:
