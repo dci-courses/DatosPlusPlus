@@ -48,6 +48,48 @@ Esto reiniciará VS Code dentro de un contenedor Docker con el entorno preconfig
 2. Al ejecutar una celda por primera vez, selecciona el kernel: **Python (DatosPlusPlus)**
 ![Seleccionar Kernel](https://github.com/dci-courses/DatosPlusPlus/blob/main/Seleccionar%20Kernel.png?raw=true)
 
+---
+
+# 🧭 Flujo de trabajo con nbdev
+
+A continuación se detalla el flujo básico para trabajar con nbdev en este proyecto:
+
+## 1. Crear o editar notebooks
+
+Los notebooks se encuentran en la carpeta principal o en `nbs/`.
+Puedes crear nuevos archivos `.ipynb` o modificar los existentes.
+
+**Ejemplo de estructura:**
+
+```
+nbs/
+ ├── 00_introduccion.ipynb
+ ├── 01_limpieza_datos.ipynb
+ └── 02_modelos.ipynb
+```
+
+Cada notebook puede contener:
+
+- Código Python
+- Celdas Markdown con documentación
+- Pruebas (assert, doctest, etc.)
+
+## 2. Verificar y limpiar notebooks
+
+Antes de subir cambios, limpia las salidas y verifica la consistencia:
+
+```bash
+nbdev_clean
+```
+
+## 3. Previsualizar cambios
+
+Una vez todo esté listo, antes de subir los cambios es necesario previsualizarlos para evitar cualquier error en producción:
+
+```bash
+nbdev_preview
+```
+
 ## 💡 Soporte
 
 Si tienes alguna pregunta o problema, por favor abre un [issue](../../issues) en este repositorio.
