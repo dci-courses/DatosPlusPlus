@@ -1,11 +1,6 @@
 website:
   sidebar:
-    contents:
-      - section: Reglas de Asociación
-        contents:
-          - association-rules/00_ejemplo_1.1.ipynb
-          - association-rules/02_ejemplo_1.2.ipynb
-          - association-rules/03_ejercicio.ipynb
+    contents:    
       - section: Clasificación
         contents:
           - classification/classification_keylogger.ipynb
@@ -16,3 +11,7 @@ website:
           - clustering/01_ejemplo_1.1.ipynb
           - clustering/02_ejemplo_2.1.ipynb
           - clustering/03_ejemplo_2.2.ipynb
+      - section: Reglas de Asociación
+        contents:
+          - association-rules/00_ejemplo_1.1.ipynb
+          - association-rules/02_ejemplo_1.2.ipynb
