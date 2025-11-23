@@ -11,3 +11,8 @@ website:
           - classification/classification_keylogger.ipynb
           - classification/classification_ransomware.ipynb
           - classification/classification_software_defects.ipynb
+      - section: Clustering
+        contents:
+          - clustering/01_ejemplo_1.1.ipynb
+          - clustering/02_ejemplo_2.1.ipynb
+          - clustering/03_ejemplo_2.2.ipynb
