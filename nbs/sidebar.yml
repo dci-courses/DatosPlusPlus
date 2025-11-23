@@ -1,6 +1,7 @@
 website:
   sidebar:
-    contents:    
+    contents:
+      - index.md
       - section: Clasificación
         contents:
           - classification/classification_keylogger.ipynb
@@ -15,3 +16,4 @@ website:
         contents:
           - association-rules/00_ejemplo_1.1.ipynb
           - association-rules/02_ejemplo_1.2.ipynb
+       
