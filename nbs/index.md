@@ -62,10 +62,10 @@ El proyecto contempla la participación de un equipo interdisciplinario de docen
 
 ## Noticias y Actualizaciones
 
-**Datos++** es un libro en evolución. Nuevas unidades, mejoras al contenido y ajustes al código se publicarán periódicamente.  
+**Datos++** es un libro en construcción. Nuevas unidades, mejoras al contenido y ajustes al código se publicarán periódicamente.  
 Para seguir los avances, novedades o contribuir al proyecto, visita el repositorio en GitHub:
 
-👉 [https://github.com/dci-courses/DatosPlusPlus](https://github.com/dci-courses/DatosPlusPlus)
+👉 [Repositorio GitHub](https://github.com/dci-courses/DatosPlusPlus)
 
 ---
 
