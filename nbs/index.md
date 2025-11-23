@@ -14,16 +14,16 @@ Cada unidad del libro reúne conceptos esenciales, ejemplos con código editable
 
 Puedes usar **Datos++** de varias maneras:
 
-### 📘 1. Leer las unidades directamente en tu navegador
-Cada capítulo está disponible en línea, con texto, figuras y bloques de código explicativos. Navega utilizando el menú lateral o comienza por la primera unidad. Todo el contenido está pensado para leerse como un libro tradicional… pero con superpoderes interactivos.
+### 1. Leer las unidades directamente en tu navegador
+Cada capítulo está disponible en línea, con texto, figuras y bloques de código explicativos. Navega utilizando el menú lateral o comienza por la primera unidad. 
 
-### 🧪 2. Ejecutar e interactuar con los notebooks
-Muchas unidades incluyen notebooks que puedes abrir, editar y ejecutar para experimentar con los datos y el código. Solo selecciona la opción correspondiente en el menú o descarga el notebook desde el repositorio para ejecutarlo localmente.
+### 2. Ejecutar e interactuar con los notebooks
+Las unidades incluyen notebooks que puedes abrir, editar y ejecutar para experimentar con los datos y el código. Solo selecciona la opción correspondiente en el menú o descarga el notebook desde el repositorio para ejecutarlo localmente.
 
-### 🧩 3. Reutilizar el código en tus propios proyectos
+### 3. Reutilizar el código en tus propios proyectos
 Todo el código de **Datos++** puede exportarse, copiarse o adaptarse libremente. Si necesitas utilizar una transformación, pipeline o técnica analítica, puedes recuperar el archivo desde el repositorio o copiarlo directamente desde el libro.
 
-### 🎤 4. Presentar contenido como apoyos de clase
+### 4. Presentar contenido como apoyos de clase
 Las unidades están diseñadas para funcionar también como material docente. Puedes mostrar fragmentos de código, diagramas o explicaciones en clases, o generar tus propios notebooks de apoyo utilizando el contenido del libro como plantilla.
 
 ---
@@ -48,6 +48,15 @@ Su diseño interactivo permite aprender tanto de forma guiada como autónoma, y 
 **Pablo Valenzuela**, **Marlen Negrier** y **Katerin Arias** desarrollan este libro como parte de una propuesta docente orientada a integrar teoría y práctica mediante *literate computing*. El proyecto se basa en principios pedagógicos contemporáneos, tales como aprendizaje experiencial, autonomía progresiva y uso de herramientas ampliamente adoptadas en la industria.
 
 Este libro es el resultado de un esfuerzo colaborativo entre ingeniería de datos, ingeniería de software y ciencias de la educación, permitiendo ofrecer un recurso técnico-pedagógico moderno, accesible y pensado para el aprendizaje real y situado.
+
+---
+
+## Financiamiento
+
+**Datos++** es un libro digital desarrollado en el marco del proyecto *DID25-0004: Datos++ Un Puente entre la Teoría y la Práctica*, adjudicado en la convocatoria de Proyectos de Desarrollo e Innovación Docente de la Vicerrectoría de Pregrado de la Universidad de La Frontera. El financiamiento obtenido permite llevar a cabo el diseño, implementación y evaluación del recurso, incluyendo el desarrollo técnico del contenido interactivo, el despliegue del sistema web y el apoyo en el procesamiento de datos del estudio asociado.
+
+El proyecto contempla la participación de un equipo interdisciplinario de docentes e investigadores, y considera recursos destinados a laborantes, infraestructura de apoyo y herramientas tecnológicas necesarias para asegurar que **Datos++** sea un material abierto, actualizado y de alta calidad. Este respaldo institucional permite que el libro esté disponible para toda la comunidad estudiantil y que su desarrollo continúe avanzando hacia nuevas versiones y mejoras.
+
 
 ---
 
