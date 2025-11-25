@@ -112,22 +112,7 @@ Ejercicio para practicar la identificación de reglas de asociación con un conj
 
 ## Dependencias entre Capítulos
 
-```
-┌─────────────────────────────────────────────────────┐
-│                      INICIO                         │
-└─────────────────────────────────────────────────────┘
-                         │
-        ┌────────────────┼────────────────┐
-        ▼                ▼                ▼
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│ CLASIFICACIÓN │ │  CLUSTERING   │ │    REGLAS     │
-│               │ │               │ │  ASOCIACIÓN   │
-├───────────────┤ ├───────────────┤ ├───────────────┤
-│ • Keyloggers  │ │ • Perros/Gatos│ │ • Introducción│
-│ • Ransomware  │ │ • Videojuegos │ │ • Python      │
-│ • Defectos SW │ │ • Alternativa │ │ • Ejercicio   │
-└───────────────┘ └───────────────┘ └───────────────┘
-```
+![SiteMap PNG](https://github.com/dci-courses/DatosPlusPlus/blob/main/sitemap-png.png?raw=true)
 
 Las tres secciones principales (Clasificación, Clustering, Reglas de Asociación) son independientes entre sí y pueden estudiarse en cualquier orden.
 

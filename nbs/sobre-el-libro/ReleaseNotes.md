@@ -41,7 +41,8 @@ Primer lanzamiento oficial del libro **Datos++**.
 
 ## Historial de Desarrollo
 
-### Mayo 2025
+### Agosto 2025
+
 - Inicio del proyecto DID25-0004
 - Configuración inicial del repositorio
 - Estructura base del libro establecida
@@ -51,6 +52,7 @@ Primer lanzamiento oficial del libro **Datos++**.
 Datos++ es un libro en construcción. Nuevas unidades, mejoras al contenido y ajustes al código se publicarán periódicamente.
 
 Para seguir los avances y novedades, visita:
+
 - [Repositorio en GitHub](https://github.com/dci-courses/DatosPlusPlus)
 - [Sitio web del libro](https://dci-courses.github.io/DatosPlusPlus/)
 
