@@ -18,5 +18,7 @@ website:
           - association-rules/02_ejemplo_1.2.ipynb
       - section: Sobre el Libro
         contents:
+          - sobre-el-libro/ReleaseNotes.md
+          - sobre-el-libro/FAQ.md
+          - sobre-el-libro/sitemap.md
           - sobre-el-libro/LICENSE.md
-       
