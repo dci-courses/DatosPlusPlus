@@ -112,7 +112,7 @@ Ejercicio para practicar la identificación de reglas de asociación con un conj
 
 ## Dependencias entre Capítulos
 
-![SiteMap PNG](https://github.com/dci-courses/DatosPlusPlus/blob/main/sitemap-png.png?raw=true)
+![](https://github.com/dci-courses/DatosPlusPlus/blob/main/sitemap-png.png?raw=true)
 
 Las tres secciones principales (Clasificación, Clustering, Reglas de Asociación) son independientes entre sí y pueden estudiarse en cualquier orden.
 
