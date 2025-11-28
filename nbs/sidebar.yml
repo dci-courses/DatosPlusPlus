@@ -1,13 +1,24 @@
 website:
   sidebar:
     contents:
-      - section: Reglas de Asociación
-        contents:
-          - association-rules/00_ejemplo_1.1.ipynb
-          - association-rules/02_ejemplo_1.2.ipynb
-          - association-rules/03_ejercicio.ipynb
+      - index.md
       - section: Clasificación
         contents:
           - classification/classification_keylogger.ipynb
           - classification/classification_ransomware.ipynb
           - classification/classification_software_defects.ipynb
+      - section: Clustering
+        contents:
+          - clustering/01_ejemplo_1.1.ipynb
+          - clustering/02_ejemplo_2.1.ipynb
+          - clustering/03_ejemplo_2.2.ipynb
+      - section: Reglas de Asociación
+        contents:
+          - association-rules/00_ejemplo_1.1.ipynb
+          - association-rules/02_ejemplo_1.2.ipynb
+      - section: Sobre el Libro
+        contents:
+          - sobre-el-libro/ReleaseNotes.md
+          - sobre-el-libro/FAQ.md
+          - sobre-el-libro/sitemap.md
+          - sobre-el-libro/LICENSE.md
