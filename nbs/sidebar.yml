@@ -2,6 +2,11 @@ website:
   sidebar:
     contents:
       - index.md
+      - section: Análisis Exploratorio de Datos (EDA)
+        contents:
+          - eda/01_ejemplo_1.ipynb
+          - eda/02_ejemplo_2.ipynb
+          - eda/03_ejemplo_3.ipynb
       - section: Clasificación
         contents:
           - classification/classification_keylogger.ipynb
