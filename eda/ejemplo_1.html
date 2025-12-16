@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>EDA - Nivel 1 – DatosPlusPlus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-774c1ecf6589ff9d6616681e15c4c448.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../tufte.css">
+<meta property="og:title" content="EDA - Nivel 1 – DatosPlusPlus">
+<meta property="og:description" content="Repositorio pque recolecta el contenido de Ingeniería de Datos y lo presenta en una página web usando nbdev.">
+<meta property="og:image" content="https://dci-courses.github.io/DatosPlusPlus/eda/01_ejemplo_1_files/figure-html/cell-8-output-1.png">
+<meta property="og:site_name" content="DatosPlusPlus">
+<meta property="og:image:height" content="471">
+<meta property="og:image:width" content="695">
+<meta name="twitter:title" content="EDA - Nivel 1 – DatosPlusPlus">
+<meta name="twitter:description" content="Repositorio pque recolecta el contenido de Ingeniería de Datos y lo presenta en una página web usando nbdev.">
+<meta name="twitter:image" content="https://dci-courses.github.io/DatosPlusPlus/eda/01_ejemplo_1_files/figure-html/cell-8-output-1.png">
+<meta name="twitter:image-height" content="471">
+<meta name="twitter:image-width" content="695">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DatosPlusPlus</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Buscar"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">Análisis Exploratorio de Datos (EDA)</a></li><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">EDA - Nivel 1</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenido a <strong>Datos++</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Análisis Exploratorio de Datos (EDA)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">EDA - Nivel 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EDA - Nivel 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EDA - Nivel 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Clasificación</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_keylogger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Keylogger detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_ransomware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ransomware detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_software_defects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Defects analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Clustering</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Perros y Gatos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_2.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Videojuegos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_2.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Videojuegos (implementación 2)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Reglas de Asociación</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../association-rules/00_ejemplo_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción a las Reglas de Asociación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../association-rules/02_ejemplo_1.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implementación del ejemplo con python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sobre el Libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/ReleaseNotes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notas de Versión</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/FAQ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preguntas Frecuentes (FAQ)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/sitemap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapa del Sitio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/LICENSE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Licencia</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#nivel-1---análisis-básico" id="toc-nivel-1---análisis-básico" class="nav-link active" data-scroll-target="#nivel-1---análisis-básico">Nivel 1 - Análisis básico</a></li>
+  <li><a href="#carga-de-datos" id="toc-carga-de-datos" class="nav-link" data-scroll-target="#carga-de-datos">1. CARGA DE DATOS</a></li>
+  <li><a href="#inspección-general" id="toc-inspección-general" class="nav-link" data-scroll-target="#inspección-general">2. INSPECCIÓN GENERAL</a>
+  <ul class="collapse">
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link" data-scroll-target="#objetivo">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#análisis-de-variable-objetivo" id="toc-análisis-de-variable-objetivo" class="nav-link" data-scroll-target="#análisis-de-variable-objetivo">3. ANÁLISIS DE VARIABLE OBJETIVO</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-1" id="toc-objetivo-1" class="nav-link" data-scroll-target="#objetivo-1">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#análisis-univariado-variable-por-variable" id="toc-análisis-univariado-variable-por-variable" class="nav-link" data-scroll-target="#análisis-univariado-variable-por-variable">4. ANÁLISIS UNIVARIADO (VARIABLE POR VARIABLE)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-2" id="toc-objetivo-2" class="nav-link" data-scroll-target="#objetivo-2">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#limpieza-de-datos" id="toc-limpieza-de-datos" class="nav-link" data-scroll-target="#limpieza-de-datos">5. LIMPIEZA DE DATOS</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-3" id="toc-objetivo-3" class="nav-link" data-scroll-target="#objetivo-3">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#análisis-bivariado-relaciones" id="toc-análisis-bivariado-relaciones" class="nav-link" data-scroll-target="#análisis-bivariado-relaciones">6. ANÁLISIS BIVARIADO (RELACIONES)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-4" id="toc-objetivo-4" class="nav-link" data-scroll-target="#objetivo-4">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones">7. CONCLUSIONES</a>
+  <ul class="collapse">
+  <li><a href="#resumen-de-hallazgos" id="toc-resumen-de-hallazgos" class="nav-link" data-scroll-target="#resumen-de-hallazgos">Resumen de Hallazgos</a></li>
+  <li><a href="#próximos-pasos-nivel-2" id="toc-próximos-pasos-nivel-2" class="nav-link" data-scroll-target="#próximos-pasos-nivel-2">Próximos Pasos (Nivel 2)</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/dci-courses/DatosPlusPlus/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li></ul></div><div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="ejemplo_1.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">Análisis Exploratorio de Datos (EDA)</a></li><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">EDA - Nivel 1</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">EDA - Nivel 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="nivel-1---análisis-básico" class="level2">
+<h2 class="anchored" data-anchor-id="nivel-1---análisis-básico">Nivel 1 - Análisis básico</h2>
+<p>En este nivel, nuestro objetivo es dominar lo básico: entender la estructura de nuestros datos antes de intentar cualquier modelado complejo.</p>
+<p>Nos enfocaremos en las siguientes etapas:</p>
+<ul>
+<li><strong>Calidad del Dato</strong>: Entender tipos de variables (numéricas vs.&nbsp;categóricas) y detectar valores nulos.</li>
+<li><strong>Análisis Univariado</strong>: Estudiar cada variable por separado (distribución, conteos).</li>
+<li><strong>Limpieza Básica</strong>: Resolver problemas sencillos de datos faltantes.</li>
+<li><strong>Relación Inicial</strong>: Ver como algunas columnas ayudan a establecer una diferencia.</li>
+</ul>
+<p>Para este ejemplo haremos uso de una fuente de datos simple, se trata de un colección de datos sobre 3 especies de pingüinos antárticos.</p>
+<ul>
+<li>Adelie<br>
+</li>
+<li>Chinstrap</li>
+<li>Gentoo</li>
+</ul>
+<p>El dataset contiene las siguientes columnas:</p>
+<ul>
+<li>species</li>
+<li>culmen_length_mm</li>
+<li>culmen_depth_mm</li>
+<li>flipper_length_mm</li>
+<li>body_mass_g</li>
+<li>island</li>
+<li>sex</li>
+</ul>
+<p>Fuente: <a href="https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data">Palmer Archipelago Antarctica Penguin Data</a></p>
+</section>
+<section id="carga-de-datos" class="level1">
+<h1>1. CARGA DE DATOS</h1>
+<div id="f1a75c84" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos las librerías necesarias</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="334a67ab" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos el dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>base_dir <span class="op">=</span> Path.cwd()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>csv_file_path <span class="op">=</span> base_dir.parent.parent.parent <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"penguins"</span> <span class="op">/</span> <span class="st">"penguins_size.csv"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_file_path, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostramos la primera fila del DataFrame para verificar que se ha cargado correctamente</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">culmen_length_mm</th>
+<th data-quarto-table-cell-role="th">culmen_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>MALE</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="inspección-general" class="level1">
+<h1>2. INSPECCIÓN GENERAL</h1>
+<section id="objetivo" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo">Objetivo</h3>
+<p>Antes de analizar nada, debemos entender la “forma” y la salud técnica de los datos.</p>
+<section id="dimensiones" class="level4">
+<h4 class="anchored" data-anchor-id="dimensiones">1. Dimensiones</h4>
+<p>Primero verificamos el tamaño del dataset. ¿Cuántas observaciones (filas) y variables (columnas) tenemos?</p>
+<div id="12419e3a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .shape nos devuelve una tupla con el número de (filas, columnas)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dimensiones del dataset: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dimensiones del dataset: (344, 7)</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong> Observamos que tenemos 344 filas y 7 columnas. Es un dataset pequeño, ideal para aprender.</p>
+</blockquote>
+</section>
+<section id="tipos-de-datos" class="level4">
+<h4 class="anchored" data-anchor-id="tipos-de-datos">2. Tipos de Datos</h4>
+<p>Es fundamental saber qué columnas son numéricas y cuáles son texto (objetos). Esto es crucial para evitar errores, como intentar calcular el promedio de una columna de texto.</p>
+<div id="942952c0" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .info() nos muestra los tipos de datos y si hay valores faltantes (null)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 344 entries, 0 to 343
+Data columns (total 7 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   species            344 non-null    object 
+ 1   island             344 non-null    object 
+ 2   culmen_length_mm   342 non-null    float64
+ 3   culmen_depth_mm    342 non-null    float64
+ 4   flipper_length_mm  342 non-null    float64
+ 5   body_mass_g        342 non-null    float64
+ 6   sex                334 non-null    object 
+dtypes: float64(4), object(3)
+memory usage: 18.9+ KB</code></pre>
+</div>
+</div>
+<div id="b4aad520" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># De forma alternativa puedes usar .dtypes para ver los tipos de datos de cada columna</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.dtypes.value_counts()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>float64    4
+object     3
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong> Vemos que hay columnas ‘object’ (texto) como <code>species</code>, <code>island</code>, <code>sex</code>. También notamos que algunas columnas tienen menos de 344 valores ‘non-null’, lo que indica datos faltantes que deberemos tratar.</p>
+</blockquote>
+</section>
+<section id="estadísticas-básicas" class="level4">
+<h4 class="anchored" data-anchor-id="estadísticas-básicas">3. Estadísticas Básicas</h4>
+<p>Damos un vistazo rápido a la distribución de las variables numéricas: media, mínimo, máximo y desviación estándar. Esto nos ayuda a identificar rangos extraños a primera vista.</p>
+<div id="56f8283a" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .describe() genera un resumen estadístico de las columnas numéricas</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">culmen_length_mm</th>
+<th data-quarto-table-cell-role="th">culmen_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>342.000000</td>
+<td>342.000000</td>
+<td>342.000000</td>
+<td>342.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>43.921930</td>
+<td>17.151170</td>
+<td>200.915205</td>
+<td>4201.754386</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>5.459584</td>
+<td>1.974793</td>
+<td>14.061714</td>
+<td>801.954536</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>32.100000</td>
+<td>13.100000</td>
+<td>172.000000</td>
+<td>2700.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>39.225000</td>
+<td>15.600000</td>
+<td>190.000000</td>
+<td>3550.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>44.450000</td>
+<td>17.300000</td>
+<td>197.000000</td>
+<td>4050.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>48.500000</td>
+<td>18.700000</td>
+<td>213.000000</td>
+<td>4750.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>59.600000</td>
+<td>21.500000</td>
+<td>231.000000</td>
+<td>6300.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong> Aquí vemos rangos de valores. Por ejemplo, la masa corporal va de 2700g a 6300g. No parecen haber valores negativos o imposibles (como peso 0) a simple vista.</p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="análisis-de-variable-objetivo" class="level1">
+<h1>3. ANÁLISIS DE VARIABLE OBJETIVO</h1>
+<section id="objetivo-1" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-1">Objetivo</h3>
+<p>Conocer qué estamos intentando predecir. En este caso: <strong>species</strong>.</p>
+<section id="pregunta-clave" class="level4">
+<h4 class="anchored" data-anchor-id="pregunta-clave">Pregunta clave</h4>
+<p>¿Está balanceado el dataset? ¿Hay muchos más pingüinos de una especie que de otra?</p>
+<div id="4a444d7c" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'species'</span>, data<span class="op">=</span>df)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribución de la Variable Objetivo (Species)'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos los números exactos</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'species'</span>].value_counts())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_ejemplo_1_files/figure-html/cell-8-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>species
+Adelie       152
+Gentoo       124
+Chinstrap     68
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong> Notamos que ‘Adelie’ es la clase mayoritaria (152), seguida de ‘Gentoo’ (124) y ‘Chinstrap’ (68). Hay un desbalance, pero no es extremo.</p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="análisis-univariado-variable-por-variable" class="level1">
+<h1>4. ANÁLISIS UNIVARIADO (VARIABLE POR VARIABLE)</h1>
+<section id="objetivo-2" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-2">Objetivo</h3>
+<p>Ver cómo se comportan las variables “explicativas” (features) por separado.</p>
+<section id="variables-numéricas" class="level4">
+<h4 class="anchored" data-anchor-id="variables-numéricas">4.1 Variables Numéricas</h4>
+<p>Analizaremos la distribución de variables como el largo de la aleta, la masa corporal y las medidas del pico. Usaremos histogramas para ver si siguen una distribución normal o si tienen sesgos.</p>
+<div id="3c437b26" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionamos columnas numéricas de interés</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="op">=</span> [<span class="st">'culmen_length_mm'</span>, <span class="st">'culmen_depth_mm'</span>, <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">10</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(numeric_cols, <span class="dv">1</span>):</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, i)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    sns.histplot(df[col], kde<span class="op">=</span><span class="va">True</span>, bins<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'Distribución de </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_ejemplo_1_files/figure-html/cell-9-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong></p>
+<ul>
+<li><strong>Flipper Length (Aleta):</strong> Parece tener una distribución bimodal (dos picos), lo que sugiere que podría haber dos grupos distintos de pingüinos mezclados (quizás por especie).</li>
+<li><strong>Body Mass (Masa):</strong> Tiene un sesgo positivo (cola hacia la derecha), indicando que hay menos pingüinos muy pesados.</li>
+</ul>
+</blockquote>
+</section>
+<section id="variables-categóricas" class="level4">
+<h4 class="anchored" data-anchor-id="variables-categóricas">4.2 Variables Categóricas</h4>
+<p>Ahora veremos las variables cualitativas: Isla y Sexo.</p>
+<div id="4a3dae6b" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico para Island</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'island'</span>, data<span class="op">=</span>df, ax<span class="op">=</span>axes[<span class="dv">0</span>])</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Distribución por Isla'</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico para Sex</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'sex'</span>, data<span class="op">=</span>df, ax<span class="op">=</span>axes[<span class="dv">1</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Distribución por Sexo'</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_ejemplo_1_files/figure-html/cell-10-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong></p>
+<ul>
+<li><strong>Isla:</strong> La isla ‘Biscoe’ tiene la mayor cantidad de registros.</li>
+<li><strong>Sexo:</strong> Parece haber un problema en la columna ‘sex’. Vemos una barra muy pequeña o extraña (posiblemente un punto ‘.’ o valor nulo malformado) además de Male/Female. Esto es un hallazgo de calidad de datos importante.</li>
+</ul>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="limpieza-de-datos" class="level1">
+<h1>5. LIMPIEZA DE DATOS</h1>
+<section id="objetivo-3" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-3">Objetivo</h3>
+<p>Resolver problemas obvios antes de buscar relaciones complejas.</p>
+<section id="detección-de-valores-nulos" class="level4">
+<h4 class="anchored" data-anchor-id="detección-de-valores-nulos">1. Detección de Valores Nulos</h4>
+<p>Primero identificamos dónde están los valores faltantes (NaN).</p>
+<div id="f2ad416d" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .isnull().sum() cuenta los valores nulos por columna</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.isnull().<span class="bu">sum</span>())</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># También verificamos el valor extraño en 'sex' que vimos antes</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Valores únicos en 'sex':"</span>, df[<span class="st">'sex'</span>].unique())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>species               0
+island                0
+culmen_length_mm      2
+culmen_depth_mm       2
+flipper_length_mm     2
+body_mass_g           2
+sex                  10
+dtype: int64
+
+Valores únicos en 'sex': ['MALE' 'FEMALE' nan '.']</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong></p>
+<ul>
+<li>Vemos algunos valores nulos en las variables numéricas y en <code>sex</code>.</li>
+<li>Confirmamos que en <code>sex</code> hay un valor <code>.</code> que debe ser tratado como nulo o error.</li>
+</ul>
+</blockquote>
+</section>
+<section id="acción" class="level4">
+<h4 class="anchored" data-anchor-id="acción">2. Acción</h4>
+<p>En este nivel básico, aplicaremos dos estrategias comunes:</p>
+<ol type="1">
+<li><strong>Imputación:</strong> Rellenar los valores faltantes con un estimado razonable. Para variables categóricas como <code>sex</code>, usaremos la <strong>moda</strong> (el valor más frecuente).</li>
+<li><strong>Eliminación:</strong> Si son pocas filas las que tienen datos faltantes en variables numéricas, podemos optar por eliminarlas para no introducir ruido.</li>
+</ol>
+<div id="9680df3c" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Tratamos el valor '.' en 'sex' como NaN</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">'sex'</span>] <span class="op">==</span> <span class="st">'.'</span>, <span class="st">'sex'</span>] <span class="op">=</span> np.nan</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Imputamos 'sex' con la moda</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>moda_sex <span class="op">=</span> df[<span class="st">'sex'</span>].mode()[<span class="dv">0</span>]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sex'</span>] <span class="op">=</span> df[<span class="st">'sex'</span>].fillna(moda_sex)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Valores nulos en 'sex' después de imputar: </span><span class="sc">{</span>df[<span class="st">'sex'</span>]<span class="sc">.</span>isnull()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Eliminamos filas con nulos restantes (en variables numéricas)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Como son pocas (menos del 5% de los datos), la eliminación es segura en este nivel.</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna()</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos que el dataset esté limpio</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Conteo de nulos final:"</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.isnull().<span class="bu">sum</span>())</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Dimensiones finales del dataset: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Valores nulos en 'sex' después de imputar: 0
+
+Conteo de nulos final:
+species              0
+island               0
+culmen_length_mm     0
+culmen_depth_mm      0
+flipper_length_mm    0
+body_mass_g          0
+sex                  0
+dtype: int64
+
+Dimensiones finales del dataset: (342, 7)</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="análisis-bivariado-relaciones" class="level1">
+<h1>6. ANÁLISIS BIVARIADO (RELACIONES)</h1>
+<section id="objetivo-4" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-4">Objetivo</h3>
+<p>En este punto verificaremos si las variables ayudan a separar las especies.</p>
+<section id="numérico-vs.-variable-objetivo" class="level4">
+<h4 class="anchored" data-anchor-id="numérico-vs.-variable-objetivo">6.1 Numérico vs.&nbsp;Variable Objetivo</h4>
+<p>¿La masa corporal varía según la especie? Usaremos un <strong>boxplot</strong> para visualizar la distribución de la masa corporal para cada especie.</p>
+<div id="cd4f2595" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">'species'</span>, y<span class="op">=</span><span class="st">'body_mass_g'</span>, data<span class="op">=</span>df)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Masa Corporal por Especie'</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_ejemplo_1_files/figure-html/cell-13-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong></p>
+<ul>
+<li>Vemos que la especie <strong>Gentoo</strong> es claramente más pesada que las otras dos (Adelie y Chinstrap).</li>
+<li>Adelie y Chinstrap tienen rangos de peso similares, por lo que la masa corporal por sí sola no es suficiente para distinguirlas entre ellas.</li>
+</ul>
+</blockquote>
+</section>
+<section id="numérico-vs.-numérico-scatterplot" class="level4">
+<h4 class="anchored" data-anchor-id="numérico-vs.-numérico-scatterplot">6.2 Numérico vs.&nbsp;Numérico (Scatterplot)</h4>
+<p>Este es el gráfico más poderoso. Veremos la relación entre el largo y la profundidad del pico, coloreando los puntos por especie (<code>hue='species'</code>).</p>
+<div id="13e6e77a" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span><span class="st">'culmen_length_mm'</span>, y<span class="op">=</span><span class="st">'culmen_depth_mm'</span>, hue<span class="op">=</span><span class="st">'species'</span>, data<span class="op">=</span>df)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Largo de Pico vs. Profundidad de Pico (por Especie)'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_ejemplo_1_files/figure-html/cell-14-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong></p>
+<ul>
+<li>Este gráfico es revelador. Podemos ver tres grupos claramente separados.</li>
+<li><strong>Adelie:</strong> Picos cortos y profundos (abajo a la izquierda/centro).</li>
+<li><strong>Gentoo:</strong> Picos de longitud media pero menos profundos (abajo a la derecha).</li>
+<li><strong>Chinstrap:</strong> Picos largos y profundos (arriba a la derecha).</li>
+<li>Esto confirma que la combinación de estas dos variables es excelente para clasificar las especies.</li>
+</ul>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="conclusiones" class="level1">
+<h1>7. CONCLUSIONES</h1>
+<section id="resumen-de-hallazgos" class="level3">
+<h3 class="anchored" data-anchor-id="resumen-de-hallazgos">Resumen de Hallazgos</h3>
+<p>Hemos completado nuestro primer Análisis Exploratorio de Datos (EDA).</p>
+<p><strong>¿Qué hemos aprendido?</strong></p>
+<ol type="1">
+<li><strong>Calidad de Datos:</strong> El dataset es pequeño pero tenía problemas reales (valores nulos, un valor extraño en ‘sex’). Aprendimos a detectarlos y solucionarlos con estrategias básicas.</li>
+<li><strong>Variables Importantes:</strong>
+<ul>
+<li>La <strong>Masa Corporal</strong> ayuda a separar a los <em>Gentoo</em> (más pesados) de los otros dos, pero confunde a <em>Adelie</em> y <em>Chinstrap</em>.</li>
+<li>La combinación de <strong>Largo de Pico</strong> y <strong>Profundidad de Pico</strong> es la clave. El scatterplot nos mostró tres grupos bien definidos.</li>
+</ul></li>
+</ol>
+</section>
+<section id="próximos-pasos-nivel-2" class="level3">
+<h3 class="anchored" data-anchor-id="próximos-pasos-nivel-2">Próximos Pasos (Nivel 2)</h3>
+<p>Aunque hemos limpiado y visualizado los datos, todavía no están listos para un algoritmo de Machine Learning.</p>
+<ul>
+<li><strong>Codificación:</strong> Los modelos matemáticos no entienden texto como “Male”, “Female” o “Biscoe”. Necesitaremos convertir estas categorías a números (Encoding).</li>
+<li><strong>Correlaciones:</strong> Necesitamos medir matemáticamente qué tan fuerte es la relación entre variables (Matriz de Correlación).</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dci-courses\.github\.io\/DatosPlusPlus");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/dci-courses/DatosPlusPlus/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

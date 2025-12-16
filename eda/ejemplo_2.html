@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>EDA - Nivel 2 – DatosPlusPlus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-774c1ecf6589ff9d6616681e15c4c448.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../tufte.css">
+<meta property="og:title" content="EDA - Nivel 2 – DatosPlusPlus">
+<meta property="og:description" content="Repositorio pque recolecta el contenido de Ingeniería de Datos y lo presenta en una página web usando nbdev.">
+<meta property="og:image" content="https://dci-courses.github.io/DatosPlusPlus/eda/02_ejemplo_2_files/figure-html/cell-6-output-1.png">
+<meta property="og:site_name" content="DatosPlusPlus">
+<meta property="og:image:height" content="394">
+<meta property="og:image:width" content="549">
+<meta name="twitter:title" content="EDA - Nivel 2 – DatosPlusPlus">
+<meta name="twitter:description" content="Repositorio pque recolecta el contenido de Ingeniería de Datos y lo presenta en una página web usando nbdev.">
+<meta name="twitter:image" content="https://dci-courses.github.io/DatosPlusPlus/eda/02_ejemplo_2_files/figure-html/cell-6-output-1.png">
+<meta name="twitter:image-height" content="394">
+<meta name="twitter:image-width" content="549">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DatosPlusPlus</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Buscar"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">Análisis Exploratorio de Datos (EDA)</a></li><li class="breadcrumb-item"><a href="../eda/ejemplo_2.html">EDA - Nivel 2</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenido a <strong>Datos++</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Análisis Exploratorio de Datos (EDA)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EDA - Nivel 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">EDA - Nivel 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EDA - Nivel 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Clasificación</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_keylogger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Keylogger detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_ransomware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ransomware detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_software_defects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Defects analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Clustering</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Perros y Gatos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_2.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Videojuegos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_2.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Videojuegos (implementación 2)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Reglas de Asociación</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../association-rules/00_ejemplo_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción a las Reglas de Asociación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../association-rules/02_ejemplo_1.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implementación del ejemplo con python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sobre el Libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/ReleaseNotes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notas de Versión</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/FAQ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preguntas Frecuentes (FAQ)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/sitemap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapa del Sitio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/LICENSE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Licencia</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#nivel-2-ingeniería-y-preparación-de-datos" id="toc-nivel-2-ingeniería-y-preparación-de-datos" class="nav-link active" data-scroll-target="#nivel-2-ingeniería-y-preparación-de-datos">Nivel 2: Ingeniería y Preparación de Datos</a></li>
+  <li><a href="#carga-de-datos" id="toc-carga-de-datos" class="nav-link" data-scroll-target="#carga-de-datos">1. CARGA DE DATOS</a></li>
+  <li><a href="#limpieza-de-tipos-de-datos" id="toc-limpieza-de-tipos-de-datos" class="nav-link" data-scroll-target="#limpieza-de-tipos-de-datos">2. LIMPIEZA DE TIPOS DE DATOS</a>
+  <ul class="collapse">
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link" data-scroll-target="#objetivo">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#análisis-del-desbalance-de-clases" id="toc-análisis-del-desbalance-de-clases" class="nav-link" data-scroll-target="#análisis-del-desbalance-de-clases">3. ANÁLISIS DEL DESBALANCE DE CLASES</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-1" id="toc-objetivo-1" class="nav-link" data-scroll-target="#objetivo-1">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#análisis-bivariado-categórico-insights-de-negocio" id="toc-análisis-bivariado-categórico-insights-de-negocio" class="nav-link" data-scroll-target="#análisis-bivariado-categórico-insights-de-negocio">4. ANÁLISIS BIVARIADO CATEGÓRICO (INSIGHTS DE NEGOCIO)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-2" id="toc-objetivo-2" class="nav-link" data-scroll-target="#objetivo-2">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#feature-engineering-creación-de-variables" id="toc-feature-engineering-creación-de-variables" class="nav-link" data-scroll-target="#feature-engineering-creación-de-variables">5. FEATURE ENGINEERING (CREACIÓN DE VARIABLES)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-3" id="toc-objetivo-3" class="nav-link" data-scroll-target="#objetivo-3">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#codificación-de-variables-encoding" id="toc-codificación-de-variables-encoding" class="nav-link" data-scroll-target="#codificación-de-variables-encoding">6. CODIFICACIÓN DE VARIABLES (ENCODING)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-4" id="toc-objetivo-4" class="nav-link" data-scroll-target="#objetivo-4">Objetivo</a></li>
+  <li><a href="#qué-es-one-hot-encoding" id="toc-qué-es-one-hot-encoding" class="nav-link" data-scroll-target="#qué-es-one-hot-encoding">¿Qué es One-Hot Encoding?</a></li>
+  </ul></li>
+  <li><a href="#matriz-de-correlación" id="toc-matriz-de-correlación" class="nav-link" data-scroll-target="#matriz-de-correlación">7. MATRIZ DE CORRELACIÓN</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-5" id="toc-objetivo-5" class="nav-link" data-scroll-target="#objetivo-5">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#conclusiones-y-siguientes-pasos" id="toc-conclusiones-y-siguientes-pasos" class="nav-link" data-scroll-target="#conclusiones-y-siguientes-pasos">8. CONCLUSIONES Y SIGUIENTES PASOS</a>
+  <ul class="collapse">
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen">Resumen</a></li>
+  <li><a href="#reflexión-para-nivel-3" id="toc-reflexión-para-nivel-3" class="nav-link" data-scroll-target="#reflexión-para-nivel-3">Reflexión para Nivel 3</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/dci-courses/DatosPlusPlus/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li></ul></div><div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="ejemplo_2.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">Análisis Exploratorio de Datos (EDA)</a></li><li class="breadcrumb-item"><a href="../eda/ejemplo_2.html">EDA - Nivel 2</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">EDA - Nivel 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="nivel-2-ingeniería-y-preparación-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="nivel-2-ingeniería-y-preparación-de-datos">Nivel 2: Ingeniería y Preparación de Datos</h2>
+<p>En este nivel, subimos la dificultad. Ya no solo miramos los datos, sino que los <strong>preparamos</strong> para que un modelo de Machine Learning pueda entenderlos. Nos enfrentaremos a problemas del mundo real como datos sucios ocultos y variables que necesitan transformación.</p>
+<p>Nos enfocaremos en las siguientes etapas:</p>
+<ul>
+<li><strong>Detección de “Trampas”:</strong> Identificar columnas que parecen correctas pero tienen errores ocultos.</li>
+<li><strong>Baseline Accuracy:</strong> Entender el desbalance de clases (¿qué pasa si mi modelo dice siempre “No”?).</li>
+<li><strong>Feature Engineering:</strong> Crear nuevas variables (bins) para mejorar la predicción.</li>
+<li><strong>Encoding:</strong> Traducir texto a números (One-Hot Encoding) para los algoritmos.</li>
+<li><strong>Correlación:</strong> Medir matemáticamente la relación entre variables.</li>
+</ul>
+<p>Para este ejemplo usaremos el dataset <strong>Telco Customer Churn</strong>, que contiene información sobre clientes de una empresa de telecomunicaciones y si cancelaron su servicio (Churn).</p>
+<p>Fuente: <a href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn">Telco Customer Churn</a></p>
+</section>
+<section id="carga-de-datos" class="level1">
+<h1>1. CARGA DE DATOS</h1>
+<div id="e6a0e48f" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos las librerías necesarias</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="5aed2995" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos el dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>base_dir <span class="op">=</span> Path.cwd()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>csv_file_path <span class="op">=</span> base_dir.parent.parent.parent <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"telco_customer_churn"</span> <span class="op">/</span> <span class="st">"Telco-Customer-Churn.csv"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_file_path, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostramos la primera fila del DataFrame para verificar que se ha cargado correctamente</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">customerID</th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">SeniorCitizen</th>
+<th data-quarto-table-cell-role="th">Partner</th>
+<th data-quarto-table-cell-role="th">Dependents</th>
+<th data-quarto-table-cell-role="th">tenure</th>
+<th data-quarto-table-cell-role="th">PhoneService</th>
+<th data-quarto-table-cell-role="th">MultipleLines</th>
+<th data-quarto-table-cell-role="th">InternetService</th>
+<th data-quarto-table-cell-role="th">OnlineSecurity</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">DeviceProtection</th>
+<th data-quarto-table-cell-role="th">TechSupport</th>
+<th data-quarto-table-cell-role="th">StreamingTV</th>
+<th data-quarto-table-cell-role="th">StreamingMovies</th>
+<th data-quarto-table-cell-role="th">Contract</th>
+<th data-quarto-table-cell-role="th">PaperlessBilling</th>
+<th data-quarto-table-cell-role="th">PaymentMethod</th>
+<th data-quarto-table-cell-role="th">MonthlyCharges</th>
+<th data-quarto-table-cell-role="th">TotalCharges</th>
+<th data-quarto-table-cell-role="th">Churn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>7590-VHVEG</td>
+<td>Female</td>
+<td>0</td>
+<td>Yes</td>
+<td>No</td>
+<td>1</td>
+<td>No</td>
+<td>No phone service</td>
+<td>DSL</td>
+<td>No</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Month-to-month</td>
+<td>Yes</td>
+<td>Electronic check</td>
+<td>29.85</td>
+<td>29.85</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+
+<p>1 rows × 21 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="limpieza-de-tipos-de-datos" class="level1">
+<h1>2. LIMPIEZA DE TIPOS DE DATOS</h1>
+<section id="objetivo" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo">Objetivo</h3>
+<p>Comprender el resultado de <code>.info()</code></p>
+<section id="el-problema" class="level4">
+<h4 class="anchored" data-anchor-id="el-problema">El Problema</h4>
+<p>A primera vista, todas las columnas parecen estar bien. Pero hay una “trampa” común en este dataset.</p>
+<div id="b73e142d" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 7043 entries, 0 to 7042
+Data columns (total 21 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   customerID        7043 non-null   object 
+ 1   gender            7043 non-null   object 
+ 2   SeniorCitizen     7043 non-null   int64  
+ 3   Partner           7043 non-null   object 
+ 4   Dependents        7043 non-null   object 
+ 5   tenure            7043 non-null   int64  
+ 6   PhoneService      7043 non-null   object 
+ 7   MultipleLines     7043 non-null   object 
+ 8   InternetService   7043 non-null   object 
+ 9   OnlineSecurity    7043 non-null   object 
+ 10  OnlineBackup      7043 non-null   object 
+ 11  DeviceProtection  7043 non-null   object 
+ 12  TechSupport       7043 non-null   object 
+ 13  StreamingTV       7043 non-null   object 
+ 14  StreamingMovies   7043 non-null   object 
+ 15  Contract          7043 non-null   object 
+ 16  PaperlessBilling  7043 non-null   object 
+ 17  PaymentMethod     7043 non-null   object 
+ 18  MonthlyCharges    7043 non-null   float64
+ 19  TotalCharges      7043 non-null   object 
+ 20  Churn             7043 non-null   object 
+dtypes: float64(1), int64(2), object(18)
+memory usage: 1.1+ MB</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Observación:</strong> Fíjate en la columna <code>TotalCharges</code>. Aparece como <code>object</code> (texto), pero debería ser numérica (float). Esto sucede porque contiene espacios vacíos <code>" "</code> que pandas interpreta como texto.</p>
+</blockquote>
+<div id="85c177b0" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forzamos la conversión a numérico. 'coerce' convierte los errores (espacios) en NaN</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'TotalCharges'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'TotalCharges'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos cuántos nulos se generaron</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Valores nulos en TotalCharges: </span><span class="sc">{</span>df[<span class="st">'TotalCharges'</span>]<span class="sc">.</span>isnull()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Imputamos los nulos con la mediana (es más robusta a outliers que la media)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'TotalCharges'</span>] <span class="op">=</span> df[<span class="st">'TotalCharges'</span>].fillna(df[<span class="st">'TotalCharges'</span>].median())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Valores nulos en TotalCharges: 11</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="análisis-del-desbalance-de-clases" class="level1">
+<h1>3. ANÁLISIS DEL DESBALANCE DE CLASES</h1>
+<section id="objetivo-1" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-1">Objetivo</h3>
+<p>Entender que en la vida real, los casos positivos (ej. fraude, fuga) suelen ser la minoría.</p>
+<section id="baseline-accuracy" class="level4">
+<h4 class="anchored" data-anchor-id="baseline-accuracy">Baseline Accuracy</h4>
+<p>Si asumimos que nadie se va (predicimos siempre “No Churn”), ¿qué tan precisos seríamos?</p>
+<div id="56d52912" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'Churn'</span>, data<span class="op">=</span>df)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribución de la Fuga (Churn)'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos el porcentaje exacto</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'Churn'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>) <span class="op">*</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_ejemplo_2_files/figure-html/cell-6-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Churn
+No     73.463013
+Yes    26.536987
+Name: proportion, dtype: float64</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong></p>
+<ul>
+<li>Vemos que aproximadamente el <strong>73%</strong> de los clientes NO se van (Clase Mayoritaria).</li>
+<li><strong>¿Qué significa este 73%?</strong> Es nuestro <strong>Baseline Accuracy</strong> (Línea Base).
+<ul>
+<li>Imagina un “modelo dummy” que simplemente adivina que <em>ningún</em> cliente se irá. Este modelo acertaría el 73% de las veces sin saber nada.</li>
+<li>Por lo tanto, <strong>cualquier modelo de Machine Learning que construyamos debe tener una precisión SUPERIOR al 73%</strong> para que valga la pena. Si nuestro modelo tiene 70% de accuracy, es peor que no hacer nada.</li>
+</ul></li>
+</ul>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="análisis-bivariado-categórico-insights-de-negocio" class="level1">
+<h1>4. ANÁLISIS BIVARIADO CATEGÓRICO (INSIGHTS DE NEGOCIO)</h1>
+<section id="objetivo-2" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-2">Objetivo</h3>
+<p>Ver cómo las categorías afectan la fuga. Responderemos preguntas de negocio clave.</p>
+<div id="c1b3adb5" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrato vs Churn</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'Contract'</span>, hue<span class="op">=</span><span class="st">'Churn'</span>, data<span class="op">=</span>df, ax<span class="op">=</span>axes[<span class="dv">0</span>])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Fuga por Tipo de Contrato'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Servicio de Internet vs Churn</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'InternetService'</span>, hue<span class="op">=</span><span class="st">'Churn'</span>, data<span class="op">=</span>df, ax<span class="op">=</span>axes[<span class="dv">1</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Fuga por Tipo de Internet'</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_ejemplo_2_files/figure-html/cell-7-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Insights:</strong></p>
+<ul>
+<li><strong>Contrato:</strong> Los clientes con contrato “Month-to-month” tienen una tasa de fuga altísima comparada con los de “Two year”.</li>
+<li><strong>Internet:</strong> Los usuarios de “Fiber optic” tienden a irse más que los de “DSL”. Esto podría indicar problemas de calidad o precio en el servicio de fibra.</li>
+</ul>
+</blockquote>
+</section>
+</section>
+<section id="feature-engineering-creación-de-variables" class="level1">
+<h1>5. FEATURE ENGINEERING (CREACIÓN DE VARIABLES)</h1>
+<section id="objetivo-3" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-3">Objetivo</h3>
+<p>Crear nueva información a partir de la existente para ayudar al modelo.</p>
+<section id="binning-agrupación" class="level4">
+<h4 class="anchored" data-anchor-id="binning-agrupación">Binning (Agrupación)</h4>
+<p>La variable <code>tenure</code> (meses de permanencia) es numérica. A veces el comportamiento de los clientes se entiende mejor por grupos (Nuevos vs Leales).</p>
+<div id="d6be59a7" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos los rangos (bins) y las etiquetas</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">12</span>, <span class="dv">24</span>, <span class="dv">48</span>, <span class="dv">100</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'0-12 Meses'</span>, <span class="st">'12-24 Meses'</span>, <span class="st">'24-48 Meses'</span>, <span class="st">'+48 Meses'</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos la nueva columna</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'tenure_group'</span>] <span class="op">=</span> pd.cut(df[<span class="st">'tenure'</span>], bins<span class="op">=</span>bins, labels<span class="op">=</span>labels)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizamos la fuga por grupo de permanencia</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'tenure_group'</span>, hue<span class="op">=</span><span class="st">'Churn'</span>, data<span class="op">=</span>df)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Fuga por Tiempo de Permanencia'</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_ejemplo_2_files/figure-html/cell-8-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="codificación-de-variables-encoding" class="level1">
+<h1>6. CODIFICACIÓN DE VARIABLES (ENCODING)</h1>
+<section id="objetivo-4" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-4">Objetivo</h3>
+<p>Transformar texto a números, ya que los modelos de ML no entienden “Yes”, “No”, “Male”, “Female”.</p>
+<section id="estrategia" class="level4">
+<h4 class="anchored" data-anchor-id="estrategia">Estrategia</h4>
+<ol type="1">
+<li><strong>Binarios (2 opciones):</strong> Mapeo directo a 0 y 1.</li>
+<li><strong>Nominales (&gt;2 opciones):</strong> One-Hot Encoding (crear columnas dummy).</li>
+</ol>
+<div id="4dcc22a8" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Variables Binarias Manuales</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Primero verificamos que no haya nulos en estas columnas</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>binary_cols <span class="op">=</span> [<span class="st">'gender'</span>, <span class="st">'Partner'</span>, <span class="st">'Dependents'</span>, <span class="st">'PhoneService'</span>, <span class="st">'PaperlessBilling'</span>, <span class="st">'Churn'</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> binary_cols:</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Valores únicos en </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>df[col]<span class="sc">.</span>unique()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'gender'</span>] <span class="op">=</span> df[<span class="st">'gender'</span>].<span class="bu">map</span>({<span class="st">'Male'</span>: <span class="dv">1</span>, <span class="st">'Female'</span>: <span class="dv">0</span>})</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Partner'</span>] <span class="op">=</span> df[<span class="st">'Partner'</span>].<span class="bu">map</span>({<span class="st">'Yes'</span>: <span class="dv">1</span>, <span class="st">'No'</span>: <span class="dv">0</span>})</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Dependents'</span>] <span class="op">=</span> df[<span class="st">'Dependents'</span>].<span class="bu">map</span>({<span class="st">'Yes'</span>: <span class="dv">1</span>, <span class="st">'No'</span>: <span class="dv">0</span>})</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'PhoneService'</span>] <span class="op">=</span> df[<span class="st">'PhoneService'</span>].<span class="bu">map</span>({<span class="st">'Yes'</span>: <span class="dv">1</span>, <span class="st">'No'</span>: <span class="dv">0</span>})</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'PaperlessBilling'</span>] <span class="op">=</span> df[<span class="st">'PaperlessBilling'</span>].<span class="bu">map</span>({<span class="st">'Yes'</span>: <span class="dv">1</span>, <span class="st">'No'</span>: <span class="dv">0</span>})</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Churn'</span>] <span class="op">=</span> df[<span class="st">'Churn'</span>].<span class="bu">map</span>({<span class="st">'Yes'</span>: <span class="dv">1</span>, <span class="st">'No'</span>: <span class="dv">0</span>})</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Valores únicos en gender: ['Female' 'Male']
+Valores únicos en Partner: ['Yes' 'No']
+Valores únicos en Dependents: ['No' 'Yes']
+Valores únicos en PhoneService: ['No' 'Yes']
+Valores únicos en PaperlessBilling: ['Yes' 'No']
+Valores únicos en Churn: ['No' 'Yes']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="qué-es-one-hot-encoding" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-one-hot-encoding">¿Qué es One-Hot Encoding?</h3>
+<p>Para variables con más de 2 opciones (como <code>InternetService</code>: DSL, Fiber optic, No), no podemos simplemente asignarles números 1, 2, 3. ¿Por qué? Porque el modelo pensaría que 3 es “mayor” que 1, y eso no es cierto (la fibra óptica no es “mayor” que el DSL, es solo diferente).</p>
+<p><strong>Solución:</strong> Creamos una nueva columna para cada opción posible.</p>
+<ul>
+<li><code>InternetService_DSL</code> (1 si es DSL, 0 si no)</li>
+<li><code>InternetService_Fiber optic</code> (1 si es Fibra, 0 si no) … y así sucesivamente.</li>
+</ul>
+<div id="49d7b5c3" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. One-Hot Encoding para el resto</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionamos las columnas categóricas restantes (excluyendo las que ya convertimos o no sirven como customerID)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cat_cols <span class="op">=</span> [<span class="st">'MultipleLines'</span>, <span class="st">'InternetService'</span>, <span class="st">'OnlineSecurity'</span>, <span class="st">'OnlineBackup'</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'DeviceProtection'</span>, <span class="st">'TechSupport'</span>, <span class="st">'StreamingTV'</span>, <span class="st">'StreamingMovies'</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Contract'</span>, <span class="st">'PaymentMethod'</span>, <span class="st">'tenure_group'</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pd.get_dummies crea las nuevas columnas (drop_first=True evita la multicolinealidad)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>df_encoded <span class="op">=</span> pd.get_dummies(df, columns<span class="op">=</span>cat_cols, drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminamos customerID que no aporta valor predictivo</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'customerID'</span> <span class="kw">in</span> df_encoded.columns:</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    df_encoded.drop(columns<span class="op">=</span>[<span class="st">'customerID'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dimensiones originales: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dimensiones después del Encoding: </span><span class="sc">{</span>df_encoded<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>df_encoded.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dimensiones originales: (7043, 22)
+Dimensiones después del Encoding: (7043, 34)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">gender</th>
+<th data-quarto-table-cell-role="th">SeniorCitizen</th>
+<th data-quarto-table-cell-role="th">Partner</th>
+<th data-quarto-table-cell-role="th">Dependents</th>
+<th data-quarto-table-cell-role="th">tenure</th>
+<th data-quarto-table-cell-role="th">PhoneService</th>
+<th data-quarto-table-cell-role="th">PaperlessBilling</th>
+<th data-quarto-table-cell-role="th">MonthlyCharges</th>
+<th data-quarto-table-cell-role="th">TotalCharges</th>
+<th data-quarto-table-cell-role="th">Churn</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">StreamingMovies_No internet service</th>
+<th data-quarto-table-cell-role="th">StreamingMovies_Yes</th>
+<th data-quarto-table-cell-role="th">Contract_One year</th>
+<th data-quarto-table-cell-role="th">Contract_Two year</th>
+<th data-quarto-table-cell-role="th">PaymentMethod_Credit card (automatic)</th>
+<th data-quarto-table-cell-role="th">PaymentMethod_Electronic check</th>
+<th data-quarto-table-cell-role="th">PaymentMethod_Mailed check</th>
+<th data-quarto-table-cell-role="th">tenure_group_12-24 Meses</th>
+<th data-quarto-table-cell-role="th">tenure_group_24-48 Meses</th>
+<th data-quarto-table-cell-role="th">tenure_group_+48 Meses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>29.85</td>
+<td>29.85</td>
+<td>0</td>
+<td>...</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>34</td>
+<td>1</td>
+<td>0</td>
+<td>56.95</td>
+<td>1889.50</td>
+<td>0</td>
+<td>...</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>53.85</td>
+<td>108.15</td>
+<td>1</td>
+<td>...</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+
+<p>3 rows × 34 columns</p>
+</div>
+</div>
+</div>
+<div id="f3aa8010" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos los tipos de datos resultantes</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_encoded.dtypes.value_counts()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>bool       24
+int64       8
+float64     2
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="ab392548" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Luego del procesamiento tenemos valores boolean que para efectos prácticos</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pueden ser tratados como enteros 0/1 por el proceso de entrenamiento.</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sin embargo es mejor convertirlos explícitamente a int para evitar problemas de tipo de datos en el modelo.</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionamos todas las columnas bool</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>bool_cols <span class="op">=</span> df_encoded.select_dtypes(include<span class="op">=</span><span class="st">"bool"</span>).columns</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos a int (0/1)</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>df_encoded[bool_cols] <span class="op">=</span> df_encoded[bool_cols].astype(<span class="bu">int</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizamos nuevamente los tipos de datos</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>df_encoded.dtypes.value_counts()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre><code>int64      32
+float64     2
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="matriz-de-correlación" class="level1">
+<h1>7. MATRIZ DE CORRELACIÓN</h1>
+<section id="objetivo-5" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-5">Objetivo</h3>
+<p>Ver relaciones matemáticas ahora que todo es numérico.</p>
+<div id="f5f9ecb5" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos la correlación con la variable objetivo 'Churn'</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>corr_churn <span class="op">=</span> df_encoded.corr()[<span class="st">'Churn'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostramos las 10 variables más correlacionadas positivamente y las 5 más negativas</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top Correlaciones Positivas:</span><span class="ch">\n</span><span class="st">"</span>, corr_churn.head(<span class="dv">10</span>))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Top Correlaciones Negativas:</span><span class="ch">\n</span><span class="st">"</span>, corr_churn.tail(<span class="dv">5</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap de las variables más importantes (opcional, para no saturar el gráfico)</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>top_cols <span class="op">=</span> corr_churn.index[:<span class="dv">15</span>] <span class="co"># Las 15 más altas</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df_encoded[top_cols].corr(), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, cmap<span class="op">=</span><span class="st">'coolwarm'</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top Correlaciones Positivas:
+ Churn                             1.000000
+InternetService_Fiber optic       0.308020
+PaymentMethod_Electronic check    0.301919
+MonthlyCharges                    0.193356
+PaperlessBilling                  0.191825
+SeniorCitizen                     0.150889
+StreamingTV_Yes                   0.063228
+StreamingMovies_Yes               0.061382
+MultipleLines_Yes                 0.040102
+tenure_group_12-24 Meses          0.020308
+Name: Churn, dtype: float64
+
+Top Correlaciones Negativas:
+ TechSupport_No internet service   -0.227890
+StreamingTV_No internet service   -0.227890
+tenure_group_+48 Meses            -0.263222
+Contract_Two year                 -0.302253
+tenure                            -0.352229
+Name: Churn, dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_ejemplo_2_files/figure-html/cell-13-output-2.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusiones-y-siguientes-pasos" class="level1">
+<h1>8. CONCLUSIONES Y SIGUIENTES PASOS</h1>
+<section id="resumen" class="level3">
+<h3 class="anchored" data-anchor-id="resumen">Resumen</h3>
+<ol type="1">
+<li><strong>Limpieza:</strong> Descubrimos que <code>TotalCharges</code> tenía espacios vacíos y los corregimos.</li>
+<li><strong>Insights:</strong>
+<ul>
+<li>Los contratos mensuales y la fibra óptica son factores de riesgo de fuga.</li>
+<li>Los clientes nuevos (0-12 meses) son los más propensos a irse.</li>
+</ul></li>
+<li><strong>Preparación:</strong> Hemos convertido todo a números. El dataset pasó de ~20 columnas a más de 30 debido al One-Hot Encoding.</li>
+</ol>
+</section>
+<section id="reflexión-para-nivel-3" class="level3">
+<h3 class="anchored" data-anchor-id="reflexión-para-nivel-3">Reflexión para Nivel 3</h3>
+<p>El One-Hot Encoding es útil, pero… ¿qué pasaría si tuviéramos una columna como “Código Postal” con 500 categorías? Nuestro dataset crecería enormemente (High Cardinality).</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dci-courses\.github\.io\/DatosPlusPlus");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/dci-courses/DatosPlusPlus/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>

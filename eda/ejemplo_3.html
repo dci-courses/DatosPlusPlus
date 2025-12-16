@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>EDA - Nivel 3 – DatosPlusPlus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-774c1ecf6589ff9d6616681e15c4c448.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../tufte.css">
+<meta property="og:title" content="EDA - Nivel 3 – DatosPlusPlus">
+<meta property="og:description" content="Repositorio pque recolecta el contenido de Ingeniería de Datos y lo presenta en una página web usando nbdev.">
+<meta property="og:image" content="https://dci-courses.github.io/DatosPlusPlus/eda/03_ejemplo_3_files/figure-html/cell-11-output-1.png">
+<meta property="og:site_name" content="DatosPlusPlus">
+<meta property="og:image:height" content="600">
+<meta property="og:image:width" content="1001">
+<meta name="twitter:title" content="EDA - Nivel 3 – DatosPlusPlus">
+<meta name="twitter:description" content="Repositorio pque recolecta el contenido de Ingeniería de Datos y lo presenta en una página web usando nbdev.">
+<meta name="twitter:image" content="https://dci-courses.github.io/DatosPlusPlus/eda/03_ejemplo_3_files/figure-html/cell-11-output-1.png">
+<meta name="twitter:image-height" content="600">
+<meta name="twitter:image-width" content="1001">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DatosPlusPlus</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Buscar"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">Análisis Exploratorio de Datos (EDA)</a></li><li class="breadcrumb-item"><a href="../eda/ejemplo_3.html">EDA - Nivel 3</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenido a <strong>Datos++</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Análisis Exploratorio de Datos (EDA)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EDA - Nivel 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EDA - Nivel 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/ejemplo_3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">EDA - Nivel 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Clasificación</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_keylogger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Keylogger detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_ransomware.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ransomware detection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../classification/classification_software_defects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Defects analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Clustering</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Perros y Gatos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_2.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Videojuegos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../clustering/ejemplo_2.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clustering de Imágenes de Videojuegos (implementación 2)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Reglas de Asociación</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../association-rules/00_ejemplo_1.1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción a las Reglas de Asociación</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../association-rules/02_ejemplo_1.2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Implementación del ejemplo con python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sobre el Libro</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/ReleaseNotes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notas de Versión</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/FAQ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preguntas Frecuentes (FAQ)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/sitemap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapa del Sitio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sobre-el-libro/LICENSE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Licencia</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#nivel-3-datos-complejos-nlp-y-estadística" id="toc-nivel-3-datos-complejos-nlp-y-estadística" class="nav-link active" data-scroll-target="#nivel-3-datos-complejos-nlp-y-estadística">Nivel 3: Datos Complejos, NLP y Estadística</a></li>
+  <li><a href="#carga-y-limpieza-inicial" id="toc-carga-y-limpieza-inicial" class="nav-link" data-scroll-target="#carga-y-limpieza-inicial">1. CARGA Y LIMPIEZA INICIAL</a>
+  <ul class="collapse">
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link" data-scroll-target="#objetivo">Objetivo</a></li>
+  <li><a href="#eliminación-de-ruido" id="toc-eliminación-de-ruido" class="nav-link" data-scroll-target="#eliminación-de-ruido">1.1 Eliminación de Ruido</a></li>
+  <li><a href="#el-problema-de-las-fechas" id="toc-el-problema-de-las-fechas" class="nav-link" data-scroll-target="#el-problema-de-las-fechas">1.2 El Problema de las Fechas</a></li>
+  <li><a href="#filtrado-del-target-estado-del-proyecto" id="toc-filtrado-del-target-estado-del-proyecto" class="nav-link" data-scroll-target="#filtrado-del-target-estado-del-proyecto">1.3 Filtrado del Target (Estado del Proyecto)</a></li>
+  </ul></li>
+  <li><a href="#ingeniería-de-características-temporales" id="toc-ingeniería-de-características-temporales" class="nav-link" data-scroll-target="#ingeniería-de-características-temporales">2. INGENIERÍA DE CARACTERÍSTICAS TEMPORALES</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-1" id="toc-objetivo-1" class="nav-link" data-scroll-target="#objetivo-1">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#manejo-de-alta-cardinalidad" id="toc-manejo-de-alta-cardinalidad" class="nav-link" data-scroll-target="#manejo-de-alta-cardinalidad">3. MANEJO DE ALTA CARDINALIDAD</a>
+  <ul class="collapse">
+  <li><a href="#el-problema" id="toc-el-problema" class="nav-link" data-scroll-target="#el-problema">El Problema</a></li>
+  </ul></li>
+  <li><a href="#procesamiento-de-texto-básico-nlp" id="toc-procesamiento-de-texto-básico-nlp" class="nav-link" data-scroll-target="#procesamiento-de-texto-básico-nlp">4. PROCESAMIENTO DE TEXTO BÁSICO (NLP)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-2" id="toc-objetivo-2" class="nav-link" data-scroll-target="#objetivo-2">Objetivo</a></li>
+  </ul></li>
+  <li><a href="#análisis-multivariado-y-outliers" id="toc-análisis-multivariado-y-outliers" class="nav-link" data-scroll-target="#análisis-multivariado-y-outliers">5. ANÁLISIS MULTIVARIADO Y OUTLIERS</a>
+  <ul class="collapse">
+  <li><a href="#el-problema-del-goal" id="toc-el-problema-del-goal" class="nav-link" data-scroll-target="#el-problema-del-goal">El Problema del “Goal”</a></li>
+  </ul></li>
+  <li><a href="#reducción-de-dimensionalidad-pca" id="toc-reducción-de-dimensionalidad-pca" class="nav-link" data-scroll-target="#reducción-de-dimensionalidad-pca">6. REDUCCIÓN DE DIMENSIONALIDAD (PCA)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-3" id="toc-objetivo-3" class="nav-link" data-scroll-target="#objetivo-3">Objetivo</a></li>
+  <li><a href="#por-qué-estandarizar-standardscaler" id="toc-por-qué-estandarizar-standardscaler" class="nav-link" data-scroll-target="#por-qué-estandarizar-standardscaler">¿Por qué Estandarizar (StandardScaler)?</a></li>
+  <li><a href="#qué-es-pca-principal-component-analysis" id="toc-qué-es-pca-principal-component-analysis" class="nav-link" data-scroll-target="#qué-es-pca-principal-component-analysis">¿Qué es PCA (Principal Component Analysis)?</a></li>
+  </ul></li>
+  <li><a href="#test-estadístico-chi-square" id="toc-test-estadístico-chi-square" class="nav-link" data-scroll-target="#test-estadístico-chi-square">7. TEST ESTADÍSTICO (CHI-SQUARE)</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-4" id="toc-objetivo-4" class="nav-link" data-scroll-target="#objetivo-4">Objetivo</a></li>
+  <li><a href="#explicación-del-análisis" id="toc-explicación-del-análisis" class="nav-link" data-scroll-target="#explicación-del-análisis"><strong>Explicación del Análisis:</strong></a></li>
+  </ul></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">8. CONCLUSIÓN</a>
+  <ul class="collapse">
+  <li><a href="#resumen-de-la-progresión" id="toc-resumen-de-la-progresión" class="nav-link" data-scroll-target="#resumen-de-la-progresión">Resumen de la Progresión:</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/dci-courses/DatosPlusPlus/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li></ul></div><div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="ejemplo_3.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/ejemplo_1.html">Análisis Exploratorio de Datos (EDA)</a></li><li class="breadcrumb-item"><a href="../eda/ejemplo_3.html">EDA - Nivel 3</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">EDA - Nivel 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="nivel-3-datos-complejos-nlp-y-estadística" class="level2">
+<h2 class="anchored" data-anchor-id="nivel-3-datos-complejos-nlp-y-estadística">Nivel 3: Datos Complejos, NLP y Estadística</h2>
+<p>En este nivel final, nos enfrentamos a la realidad de los datos “sucios” y complejos. Trabajaremos con fechas, texto libre y categorías con cientos de opciones.</p>
+<p>Nos enfocaremos en:</p>
+<ul>
+<li><strong>Fechas:</strong> Extraer inteligencia de columnas de tiempo.</li>
+<li><strong>Alta Cardinalidad:</strong> ¿Qué hacer con categorías que tienen 100+ opciones?</li>
+<li><strong>NLP Básico:</strong> Extraer información de texto (títulos de proyectos).</li>
+<li><strong>Transformaciones:</strong> Logaritmos para datos sesgados y PCA para reducción de dimensiones.</li>
+<li><strong>Validación Estadística:</strong> Ir más allá de los gráficos con tests de hipótesis.</li>
+</ul>
+<p>Usaremos el dataset de <strong>Kickstarter Projects</strong>, analizando qué hace que un proyecto tenga éxito o fracase.</p>
+<p>Fuente: <a href="https://www.kaggle.com/datasets/kemical/kickstarter-projects">Kicksarter Projects</a></p>
+</section>
+<section id="carga-y-limpieza-inicial" class="level1">
+<h1>1. CARGA Y LIMPIEZA INICIAL</h1>
+<section id="objetivo" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo">Objetivo</h3>
+<p>Limpiar el ruido. Los datasets reales vienen con IDs internos, columnas duplicadas y formatos de fecha incorrectos.</p>
+<div id="a8dee7d8" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos las librerías necesarias</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="c13afa23" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos el dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>base_dir <span class="op">=</span> Path.cwd()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>csv_file_path <span class="op">=</span> base_dir.parent.parent.parent <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"kickstarter"</span> <span class="op">/</span> <span class="st">"ks_projects_201612_sample.csv"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(csv_file_path, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostramos la primera fila del DataFrame para verificar que se ha cargado correctamente</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">main_category</th>
+<th data-quarto-table-cell-role="th">currency</th>
+<th data-quarto-table-cell-role="th">deadline</th>
+<th data-quarto-table-cell-role="th">goal</th>
+<th data-quarto-table-cell-role="th">launched</th>
+<th data-quarto-table-cell-role="th">pledged</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">backers</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">usd pledged</th>
+<th data-quarto-table-cell-role="th">Unnamed: 13</th>
+<th data-quarto-table-cell-role="th">Unnamed: 14</th>
+<th data-quarto-table-cell-role="th">Unnamed: 15</th>
+<th data-quarto-table-cell-role="th">Unnamed: 16</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>379677482</td>
+<td>Fico - The World's 1st Finger Condom for your ...</td>
+<td>Product Design</td>
+<td>Design</td>
+<td>EUR</td>
+<td>2015-12-02 22:59:13</td>
+<td>1600</td>
+<td>2015-11-02 22:59:13</td>
+<td>116</td>
+<td>failed</td>
+<td>11</td>
+<td>FR</td>
+<td>127.6735788</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="084119f5" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paso 1: Inspección de Columnas</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimimos la lista de columnas para ver si notamos algo extraño</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns.tolist())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['ID ', 'name ', 'category ', 'main_category ', 'currency ', 'deadline ', 'goal ', 'launched ', 'pledged ', 'state ', 'backers ', 'country ', 'usd pledged ', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16']</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Observación:</strong> ¡Cuidado! Si miras con atención, verás que algunas columnas tienen espacios al final (ej. <code>'launched '</code>, <code>'state '</code>). Esto es un error muy común en CSVs sucios y hará que nuestro código falle si buscamos <code>df['launched']</code>.</p>
+</blockquote>
+<div id="82fedd04" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solución: Limpiamos los espacios en blanco de los nombres de las columnas</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.strip()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos que se haya arreglado</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns.tolist())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['ID', 'name', 'category', 'main_category', 'currency', 'deadline', 'goal', 'launched', 'pledged', 'state', 'backers', 'country', 'usd pledged', 'Unnamed: 13', 'Unnamed: 14', 'Unnamed: 15', 'Unnamed: 16']</code></pre>
+</div>
+</div>
+</section>
+<section id="eliminación-de-ruido" class="level3">
+<h3 class="anchored" data-anchor-id="eliminación-de-ruido">1.1 Eliminación de Ruido</h3>
+<p>Tenemos columnas como <code>ID</code> que no sirven para predecir, y columnas <code>Unnamed</code>.</p>
+<div id="ea5e6887" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cols_to_drop <span class="op">=</span> [<span class="st">'ID'</span>, <span class="st">'currency'</span>, <span class="st">'Unnamed: 13'</span>, <span class="st">'Unnamed: 14'</span>, <span class="st">'Unnamed: 15'</span>, <span class="st">'Unnamed: 16'</span>] </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.drop(columns<span class="op">=</span>[c <span class="cf">for</span> c <span class="kw">in</span> cols_to_drop <span class="cf">if</span> c <span class="kw">in</span> df.columns], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">main_category</th>
+<th data-quarto-table-cell-role="th">deadline</th>
+<th data-quarto-table-cell-role="th">goal</th>
+<th data-quarto-table-cell-role="th">launched</th>
+<th data-quarto-table-cell-role="th">pledged</th>
+<th data-quarto-table-cell-role="th">state</th>
+<th data-quarto-table-cell-role="th">backers</th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">usd pledged</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Fico - The World's 1st Finger Condom for your ...</td>
+<td>Product Design</td>
+<td>Design</td>
+<td>2015-12-02 22:59:13</td>
+<td>1600</td>
+<td>2015-11-02 22:59:13</td>
+<td>116</td>
+<td>failed</td>
+<td>11</td>
+<td>FR</td>
+<td>127.6735788</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="el-problema-de-las-fechas" class="level3">
+<h3 class="anchored" data-anchor-id="el-problema-de-las-fechas">1.2 El Problema de las Fechas</h3>
+<p>Pandas carga las fechas como texto (<code>object</code>) por defecto si no tienen un formato estándar perfecto.</p>
+<div id="200eaebd" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos los tipos de datos actuales de las fechas</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'launched'</span>, <span class="st">'deadline'</span>]].dtypes)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'launched'</span>, <span class="st">'deadline'</span>]].head(<span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>launched    object
+deadline    object
+dtype: object</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">launched</th>
+<th data-quarto-table-cell-role="th">deadline</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2015-11-02 22:59:13</td>
+<td>2015-12-02 22:59:13</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2013-04-24 22:03:25</td>
+<td>2013-06-23 01:59:00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2016-09-29 14:46:59</td>
+<td>2016-10-29 14:46:59</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="5f2283d8" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solución: Convertimos explícitamente a datetime</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'launched'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'launched'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'deadline'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'deadline'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificamos el cambio</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'launched'</span>, <span class="st">'deadline'</span>]].dtypes)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>launched    datetime64[ns]
+deadline    datetime64[ns]
+dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="filtrado-del-target-estado-del-proyecto" class="level3">
+<h3 class="anchored" data-anchor-id="filtrado-del-target-estado-del-proyecto">1.3 Filtrado del Target (Estado del Proyecto)</h3>
+<p>Nuestro objetivo es predecir Éxito o Fracaso. Pero, ¿qué otros estados hay en el dataset?</p>
+<div id="5f8fefbd" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vemos la distribución de estados</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'state'</span>].value_counts())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>state
+failed        5260
+successful    3478
+canceled       953
+live           144
+undefined      108
+suspended       40
+0                4
+365              1
+2290             1
+325              1
+1100             1
+97               1
+3141             1
+12201            1
+109              1
+1296             1
+5                1
+400              1
+90               1
+55               1
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="5f4330b9" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solución: Nos quedamos solo con los estados finales ('successful' y 'failed')</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>valid_states <span class="op">=</span> [<span class="st">'successful'</span>, <span class="st">'failed'</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'state'</span>].isin(valid_states)].copy()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Dimensiones finales tras la limpieza: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Dimensiones finales tras la limpieza: (8738, 11)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="ingeniería-de-características-temporales" class="level1">
+<h1>2. INGENIERÍA DE CARACTERÍSTICAS TEMPORALES</h1>
+<section id="objetivo-1" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-1">Objetivo</h3>
+<p>Los modelos de ML no “entienden” las fechas. Debemos extraer números útiles de ellas.</p>
+<div id="8c01bc8e" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos la duración del proyecto en días</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'duration_days'</span>] <span class="op">=</span> (df[<span class="st">'deadline'</span>] <span class="op">-</span> df[<span class="st">'launched'</span>]).dt.days</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraemos mes y día de la semana</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'month_launched'</span>] <span class="op">=</span> df[<span class="st">'launched'</span>].dt.month_name()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'day_launched'</span>] <span class="op">=</span> df[<span class="st">'launched'</span>].dt.day_name()</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizamos la tasa de éxito por mes</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos la tasa de éxito (promedio de 'state' convertido a binario)</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Primero convertimos state a 1 (successful) y 0 (failed) para calcular promedios</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'state_bin'</span>] <span class="op">=</span> df[<span class="st">'state'</span>].<span class="bu">map</span>({<span class="st">'successful'</span>: <span class="dv">1</span>, <span class="st">'failed'</span>: <span class="dv">0</span>})</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'month_launched'</span>, y<span class="op">=</span><span class="st">'state_bin'</span>, data<span class="op">=</span>df, order<span class="op">=</span>[<span class="st">'January'</span>, <span class="st">'February'</span>, <span class="st">'March'</span>, <span class="st">'April'</span>, <span class="st">'May'</span>, <span class="st">'June'</span>, <span class="st">'July'</span>, <span class="st">'August'</span>, <span class="st">'September'</span>, <span class="st">'October'</span>, <span class="st">'November'</span>, <span class="st">'December'</span>])</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Tasa de Éxito por Mes de Lanzamiento'</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_ejemplo_3_files/figure-html/cell-11-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="manejo-de-alta-cardinalidad" class="level1">
+<h1>3. MANEJO DE ALTA CARDINALIDAD</h1>
+<section id="el-problema" class="level3">
+<h3 class="anchored" data-anchor-id="el-problema">El Problema</h3>
+<p>La columna <code>category</code> o <code>main_category</code> puede tener muchas opciones. Si hacemos One-Hot Encoding, explotamos el número de columnas (Maldición de la Dimensionalidad).</p>
+<div id="ddc93a60" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Número de categorías únicas: </span><span class="sc">{</span>df[<span class="st">'category'</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'category'</span>].value_counts().head(<span class="dv">10</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Número de categorías únicas: 155
+category
+Product Design    464
+Documentary       405
+Music             343
+Shorts            343
+Food              314
+Tabletop Games    286
+Video Games       239
+Film &amp; Video      225
+Fiction           218
+Fashion           205
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<section id="solución-1-agrupación-top-n-other" class="level4">
+<h4 class="anchored" data-anchor-id="solución-1-agrupación-top-n-other">Solución 1: Agrupación (Top N + Other)</h4>
+<p>Nos quedamos con las más frecuentes y agrupamos el resto.</p>
+<div id="5875e9e0" class="cell" data-execution_count="43">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>top_10_categories <span class="op">=</span> df[<span class="st">'category'</span>].value_counts().nlargest(<span class="dv">10</span>).index</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'category_grouped'</span>] <span class="op">=</span> df[<span class="st">'category'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="cf">if</span> x <span class="kw">in</span> top_10_categories <span class="cf">else</span> <span class="st">'Other'</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'category_grouped'</span>].value_counts())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>category_grouped
+Other             5696
+Product Design     464
+Documentary        405
+Shorts             343
+Music              343
+Food               314
+Tabletop Games     286
+Video Games        239
+Film &amp; Video       225
+Fiction            218
+Fashion            205
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="solución-2-target-encoding" class="level4">
+<h4 class="anchored" data-anchor-id="solución-2-target-encoding">Solución 2: Target Encoding</h4>
+<p>Reemplazamos la categoría por la probabilidad promedio de éxito de esa categoría. <strong>¡Cuidado!</strong> Esto puede causar <em>Data Leakage</em> si no se hace con validación cruzada, pero para EDA es muy útil para visualizar.</p>
+<div id="1fbc4e5e" class="cell" data-execution_count="44">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos el promedio de éxito por categoría</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>target_map <span class="op">=</span> df.groupby(<span class="st">'category'</span>)[<span class="st">'state_bin'</span>].mean()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapeamos</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'category_encoded'</span>] <span class="op">=</span> df[<span class="st">'category'</span>].<span class="bu">map</span>(target_map)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'category'</span>, <span class="st">'state_bin'</span>, <span class="st">'category_encoded'</span>]].head()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">state_bin</th>
+<th data-quarto-table-cell-role="th">category_encoded</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Product Design</td>
+<td>0</td>
+<td>0.387931</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Publishing</td>
+<td>0</td>
+<td>0.299213</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Design</td>
+<td>1</td>
+<td>0.420000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Indie Rock</td>
+<td>1</td>
+<td>0.711765</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Art</td>
+<td>1</td>
+<td>0.463542</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="procesamiento-de-texto-básico-nlp" class="level1">
+<h1>4. PROCESAMIENTO DE TEXTO BÁSICO (NLP)</h1>
+<section id="objetivo-2" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-2">Objetivo</h3>
+<p>¿Influye el nombre del proyecto? Vamos a extraer métricas simples.</p>
+<div id="ebf8c0bd" class="cell" data-execution_count="45">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Largo del nombre (caracteres)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'name_len'</span>] <span class="op">=</span> df[<span class="st">'name'</span>].astype(<span class="bu">str</span>).<span class="bu">apply</span>(<span class="bu">len</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conteo de palabras</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'word_count'</span>] <span class="op">=</span> df[<span class="st">'name'</span>].astype(<span class="bu">str</span>).<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">len</span>(x.split()))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">'state'</span>, y<span class="op">=</span><span class="st">'name_len'</span>, data<span class="op">=</span>df)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Largo del Nombre vs Éxito'</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_ejemplo_3_files/figure-html/cell-15-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="análisis-multivariado-y-outliers" class="level1">
+<h1>5. ANÁLISIS MULTIVARIADO Y OUTLIERS</h1>
+<section id="el-problema-del-goal" class="level3">
+<h3 class="anchored" data-anchor-id="el-problema-del-goal">El Problema del “Goal”</h3>
+<p>La meta financiera (<code>goal</code>) tiene un rango enorme. Visualizarla directamente es difícil.</p>
+<p>Antes de realizar cualquier transformación, es fundamental visualizar la distribución original de las variables numéricas para detectar valores atípicos (outliers). En este caso, observaremos la variable <code>goal</code>.</p>
+<div id="3a251a4e" class="cell" data-execution_count="46">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span>df[<span class="st">'goal'</span>])</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribución de Goal (Original) - Detectando Outliers'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Goal (USD)'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_ejemplo_3_files/figure-html/cell-16-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Observación:</strong> Como se puede apreciar en el gráfico de caja (boxplot), la variable <code>goal</code> tiene un rango extremadamente amplio con outliers muy lejanos. Esto hace que la “caja” principal (donde está la mayoría de los datos) se vea como una línea aplastada a la izquierda.</p>
+<p>Para corregir este sesgo y visualizar mejor la relación con otras variables, aplicaremos una <strong>transformación logarítmica</strong> (<code>np.log1p</code>).</p>
+<div id="e3859dfb" class="cell" data-execution_count="47">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformación Logarítmica para suavizar la distribución</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aseguramos que 'goal' sea numérico (puede venir como texto si el CSV estaba sucio)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'goal'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'goal'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicamos logaritmo (log1p calcula log(1+x) para evitar error con log(0))</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'log_goal'</span>] <span class="op">=</span> np.log1p(df[<span class="st">'goal'</span>])</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot Multivariado</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span><span class="st">'duration_days'</span>, y<span class="op">=</span><span class="st">'log_goal'</span>, hue<span class="op">=</span><span class="st">'state'</span>, data<span class="op">=</span>df, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Duración vs Meta (Log) vs Éxito'</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_ejemplo_3_files/figure-html/cell-17-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis:</strong></p>
+<ul>
+<li><strong>La Trampa de la Ambición:</strong> Observamos una clara tendencia: cuanto mayor es la meta financiera (<code>log_goal</code> alto), más puntos naranjas (failed) vemos. Pedir demasiado dinero es un factor de riesgo.</li>
+<li><strong>Duración:</strong> No parece haber una relación lineal fuerte entre duración y éxito, aunque los proyectos extremadamente largos a veces pierden “momentum”.</li>
+<li><strong>Zona de Éxito:</strong> La mayoría de los proyectos exitosos (azules) se concentran en metas moderadas.</li>
+</ul>
+</blockquote>
+</section>
+</section>
+<section id="reducción-de-dimensionalidad-pca" class="level1">
+<h1>6. REDUCCIÓN DE DIMENSIONALIDAD (PCA)</h1>
+<section id="objetivo-3" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-3">Objetivo</h3>
+<p>Ver nuestros datos multidimensionales en 2D.</p>
+</section>
+<section id="por-qué-estandarizar-standardscaler" class="level3">
+<h3 class="anchored" data-anchor-id="por-qué-estandarizar-standardscaler">¿Por qué Estandarizar (StandardScaler)?</h3>
+<p>PCA es muy sensible a la escala de los datos. Si una variable se mide en millones (ej. <code>goal</code>) y otra en unidades pequeñas (ej. <code>duration_days</code>), PCA pensará que la variable grande es mucho más importante solo por ser un número más grande. <strong>StandardScaler</strong> pone todas las variables en la misma “regla” (media 0, desviación estándar 1) para que compitan en igualdad de condiciones.</p>
+</section>
+<section id="qué-es-pca-principal-component-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-pca-principal-component-analysis">¿Qué es PCA (Principal Component Analysis)?</h3>
+<p>Es una técnica matemática que “aplasta” muchas dimensiones (variables) en pocas (Componentes Principales), tratando de perder la menor cantidad de información posible.</p>
+<ul>
+<li><strong>PC1:</strong> Es la dirección donde los datos varían más.</li>
+<li><strong>PC2:</strong> Es la segunda dirección más importante (perpendicular a la primera).</li>
+</ul>
+<p>Nos permite visualizar en un gráfico 2D un dataset que tiene 6 o más dimensiones.</p>
+<div id="42fd7091" class="cell" data-execution_count="48">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionamos variables numéricas</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'duration_days'</span>, <span class="st">'goal'</span>, <span class="st">'name_len'</span>, <span class="st">'word_count'</span>, <span class="st">'backers'</span>, <span class="st">'usd pledged'</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Limpiamos nulos que hayan podido quedar</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>df_pca <span class="op">=</span> df[features].dropna()</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Estandarización (Obligatorio para PCA)</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(df_pca)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. PCA</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>principalComponents <span class="op">=</span> pca.fit_transform(X_scaled)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>pca_df <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>principalComponents, columns<span class="op">=</span>[<span class="st">'PC1'</span>, <span class="st">'PC2'</span>])</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregamos el target para colorear (teniendo cuidado con los índices si hubo dropna)</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>pca_df[<span class="st">'state'</span>] <span class="op">=</span> df.loc[df_pca.index, <span class="st">'state'</span>].values</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span><span class="st">'PC1'</span>, y<span class="op">=</span><span class="st">'PC2'</span>, hue<span class="op">=</span><span class="st">'state'</span>, data<span class="op">=</span>pca_df, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'PCA: Visualización en 2D'</span>)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_ejemplo_3_files/figure-html/cell-18-output-1.png" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Análisis</strong></p>
+<ul>
+<li><strong>Mezcla de Clases:</strong> Si ves que los puntos azules (successful) y naranjas (failed) están muy mezclados, significa que el problema es difícil. Un modelo lineal simple (como Regresión Logística) podría no ser suficiente.</li>
+<li><strong>Separación:</strong> Si ves grupos claros, ¡genial! El modelo tendrá un trabajo fácil.</li>
+<li><strong>Varianza:</strong> Los ejes PC1 y PC2 capturan la mayor parte de la información. Si los puntos están muy dispersos, hay mucha variabilidad en tus datos.</li>
+</ul>
+</blockquote>
+</section>
+</section>
+<section id="test-estadístico-chi-square" class="level1">
+<h1>7. TEST ESTADÍSTICO (CHI-SQUARE)</h1>
+<section id="objetivo-4" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-4">Objetivo</h3>
+<p>Validar si la categoría principal (<code>main_category</code>) realmente influye en el éxito.</p>
+<div id="82cdd6c9" class="cell" data-execution_count="49">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla de contingencia</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>contingency_table <span class="op">=</span> pd.crosstab(df[<span class="st">'main_category'</span>], df[<span class="st">'state'</span>])</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Test</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>chi2, p, dof, expected <span class="op">=</span> chi2_contingency(contingency_table)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P-value: </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p <span class="op">&lt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Rechazamos la hipótesis nula: Hay una relación significativa entre la Categoría y el Éxito."</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No hay evidencia suficiente para decir que influye."</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P-value: 1.847174668435891e-92
+Rechazamos la hipótesis nula: Hay una relación significativa entre la Categoría y el Éxito.</code></pre>
+</div>
+</div>
+</section>
+<section id="explicación-del-análisis" class="level3">
+<h3 class="anchored" data-anchor-id="explicación-del-análisis"><strong>Explicación del Análisis:</strong></h3>
+<ol type="1">
+<li><p><strong>¿Qué hicimos?</strong> Creamos una <strong>tabla de contingencia</strong> (<code>pd.crosstab</code>) que cuenta cuántos proyectos exitosos y fallidos hay por cada categoría. Luego, aplicamos la prueba <strong>Chi-Cuadrado de Independencia</strong> (<code>chi2_contingency</code>).</p></li>
+<li><p><strong>¿Para qué?</strong> Queremos saber si el éxito de un proyecto depende de su categoría o si es puramente aleatorio.</p>
+<ul>
+<li><strong>Hipótesis Nula (<span class="math inline">\(H_0\)</span>):</strong> No hay relación (son independientes). La categoría no importa.</li>
+<li><strong>Hipótesis Alternativa (<span class="math inline">\(H_1\)</span>):</strong> Sí hay relación (son dependientes). La categoría influye en el éxito.</li>
+</ul></li>
+<li><p><strong>Interpretación:</strong></p>
+<ul>
+<li>Si el <strong>P-value &lt; 0.05</strong>, rechazamos <span class="math inline">\(H_0\)</span>. Concluimos que <strong>la categoría SÍ influye</strong> en la probabilidad de éxito.</li>
+<li>Si el <strong>P-value &gt;= 0.05</strong>, no podemos descartar que sea azar.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="conclusión" class="level1">
+<h1>8. CONCLUSIÓN</h1>
+<p>En este nivel hemos abordado la complejidad de los datos del mundo real. Hemos aprendido a detectar y corregir errores de codificación y formato, a manejar variables con alta cardinalidad mediante agrupamiento, y a extraer información valiosa de fechas y texto. Además, hemos aplicado técnicas avanzadas como la transformación logarítmica para corregir sesgos, PCA para reducir la dimensionalidad y tests estadísticos para validar hipótesis.</p>
+<section id="resumen-de-la-progresión" class="level3">
+<h3 class="anchored" data-anchor-id="resumen-de-la-progresión">Resumen de la Progresión:</h3>
+<ul>
+<li><strong>Nivel 1:</strong> Inspección básica, limpieza de nulos, gráficos univariados.</li>
+<li><strong>Nivel 2:</strong> Tipos de datos, One-Hot Encoding, Correlaciones.</li>
+<li><strong>Nivel 3:</strong> Fechas, NLP básico, Alta Cardinalidad, Logaritmos, PCA y Tests Estadísticos.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/dci-courses\.github\.io\/DatosPlusPlus");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/dci-courses/DatosPlusPlus/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li></ul></div></div></div></footer></body></html>
